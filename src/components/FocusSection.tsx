@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 interface FocusPillarProps {
@@ -9,17 +10,17 @@ interface FocusPillarProps {
 
 const FocusPillar: React.FC<FocusPillarProps> = ({ image, title, description, imageAlt }) => {
   return (
-    <article className="bg-[rgba(207,218,255,1)] grow text-black w-full pb-10 rounded-[33px_0px_62px_0px] hover:shadow-lg transition-shadow">
+    <article className="bg-[rgba(207,218,255,1)] text-black w-full pb-6 lg:pb-10 rounded-[33px_0px_62px_0px] hover:shadow-lg transition-shadow">
       <img
         src={image}
         alt={imageAlt}
-        className="aspect-[1.62] object-contain w-full z-10 rounded-[33px_0px_0px_0px]"
+        className="aspect-[1.62] object-contain w-full rounded-[33px_0px_0px_0px]"
       />
-      <div className="flex flex-col items-stretch mt-[15px] px-[15px]">
-        <h3 className="text-2xl font-semibold">
+      <div className="flex flex-col items-stretch mt-4 lg:mt-[15px] px-4 lg:px-[15px]">
+        <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold">
           {title}
         </h3>
-        <p className="text-xl font-normal mt-[53px] max-md:mt-10">
+        <p className="text-sm sm:text-base lg:text-xl font-normal mt-6 lg:mt-[53px]">
           {description}
         </p>
       </div>
@@ -56,26 +57,22 @@ export const FocusSection: React.FC = () => {
   ];
 
   return (
-    <section className="w-full max-w-[1400px] mx-auto px-4">
+    <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <header className="text-center">
-        <h2 className="text-black text-[64px] font-bold mt-16 max-md:text-[40px] max-md:mt-10">
+        <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl xl:text-[64px] font-bold mt-8 lg:mt-16">
           Our Focus
         </h2>
-        <p className="text-black text-2xl font-medium mt-[29px]">
+        <p className="text-black text-lg sm:text-xl lg:text-2xl font-medium mt-4 lg:mt-[29px]">
           The four pillars of financial planning
         </p>
       </header>
-      <div className="self-stretch flex w-full flex-col mt-7 pl-[31px] pr-[3px] max-md:max-w-full max-md:pl-5">
-        <div className="self-center w-full max-w-[1358px] max-md:max-w-full">
-          <div className="gap-5 flex max-md:flex-col max-md:items-stretch">
-            {pillars.map((pillar, index) => (
-              <div key={index} className="w-3/12 max-md:w-full max-md:ml-0">
-                <div className={`mt-[${index === 0 ? '15' : index === 1 ? '11' : index === 2 ? '0' : '0'}px] max-md:mt-[${index === 0 ? '39' : index === 1 ? '35' : index === 2 ? '34' : '6'}px]`}>
-                  <FocusPillar {...pillar} />
-                </div>
-              </div>
-            ))}
-          </div>
+      <div className="w-full mt-6 lg:mt-7">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-5">
+          {pillars.map((pillar, index) => (
+            <div key={index} className="w-full">
+              <FocusPillar {...pillar} />
+            </div>
+          ))}
         </div>
       </div>
     </section>
