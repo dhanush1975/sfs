@@ -4,7 +4,7 @@ import React from 'react';
 export const MissionSection: React.FC = () => {
   return (
     <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <header className="text-black text-3xl sm:text-4xl lg:text-5xl xl:text-[64px] font-medium mt-12 lg:mt-[89px] text-center leading-tight">
+      <header className="text-black text-3xl sm:text-4xl lg:text-5xl xl:text-[64px] font-medium mt-8 lg:mt-[60px] text-center leading-tight">
         Feel Confident in Your Financial Future
       </header>
       <p className="text-black text-base sm:text-lg lg:text-xl font-normal mt-6 lg:mt-[35px] text-center max-w-5xl mx-auto">
