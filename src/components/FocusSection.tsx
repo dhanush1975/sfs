@@ -10,17 +10,17 @@ interface FocusPillarProps {
 
 const FocusPillar: React.FC<FocusPillarProps> = ({ image, title, description, imageAlt }) => {
   return (
-    <article className="bg-[rgba(207,218,255,1)] text-black w-full pb-6 lg:pb-10 rounded-[33px_0px_62px_0px] hover:shadow-lg transition-shadow">
+    <article className="bg-[rgba(207,218,255,1)] text-black w-full h-full flex flex-col pb-6 lg:pb-10 rounded-[33px_0px_62px_0px] hover:shadow-lg transition-shadow">
       <img
         src={image}
         alt={imageAlt}
-        className="aspect-[1.62] object-contain w-full rounded-[33px_0px_0px_0px]"
+        className="aspect-[1.62] object-cover w-full h-48 sm:h-52 lg:h-56 rounded-[33px_0px_0px_0px] flex-shrink-0"
       />
-      <div className="flex flex-col items-stretch mt-4 lg:mt-[15px] px-4 lg:px-[15px]">
-        <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold">
+      <div className="flex flex-col flex-grow justify-between mt-4 lg:mt-[15px] px-4 lg:px-[15px]">
+        <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold min-h-[2.5rem] flex items-center">
           {title}
         </h3>
-        <p className="text-sm sm:text-base lg:text-xl font-normal mt-6 lg:mt-[53px]">
+        <p className="text-sm sm:text-base lg:text-xl font-normal mt-6 lg:mt-[53px] flex-grow">
           {description}
         </p>
       </div>
@@ -67,9 +67,9 @@ export const FocusSection: React.FC = () => {
         </p>
       </header>
       <div className="w-full mt-6 lg:mt-7">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-5 items-stretch">
           {pillars.map((pillar, index) => (
-            <div key={index} className="w-full">
+            <div key={index} className="w-full h-full">
               <FocusPillar {...pillar} />
             </div>
           ))}
