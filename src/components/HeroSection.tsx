@@ -15,14 +15,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onRSVP }) => {
   };
 
   return (
-    <section className="flex flex-col self-stretch relative min-h-[500px] sm:min-h-[600px] lg:min-h-[885px] w-full text-lg sm:text-xl lg:text-2xl text-white font-normal justify-center px-4 sm:px-8 lg:px-[61px] py-16 sm:py-20 lg:py-[124px]">
+    <section className="flex flex-col self-stretch relative min-h-[500px] sm:min-h-[600px] lg:min-h-[885px] w-full text-lg sm:text-xl lg:text-2xl text-white font-normal justify-center items-start px-4 sm:px-8 lg:px-[61px] py-16 sm:py-20 lg:py-[124px]">
       <img
         src="https://cdn.builder.io/api/v1/image/assets/fe54aceb0cc448d8a698709588f64afc/647a2a6a75ec85010f3bd88d1e287e2ad27c1514?placeholderIfAbsent=true"
         alt="Hero background"
         className="absolute h-full w-full object-cover inset-0"
       />
       <article className="relative bg-[rgba(0,0,0,0.55)] flex w-full max-w-[515px] flex-col items-stretch pl-6 sm:pl-8 lg:pl-[57px] pr-4 pt-[13px] pb-[35px] rounded-[40px]">
-        <header className="text-xl sm:text-2xl lg:text-[32px] font-bold ml-4 sm:ml-6 lg:ml-[35px]">
+        <header className="text-xl sm:text-2xl lg:text-[32px] font-bold text-center">
           UPCOMING EVENT
         </header>
         <img
@@ -30,10 +30,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onRSVP }) => {
           alt="Upcoming event"
           className="aspect-[1.79] object-contain w-full mt-6 lg:mt-[43px]"
         />
-        <div className="self-center mt-4 lg:mt-[26px]">
+        <div className="self-center mt-4 lg:mt-[26px] text-center">
           Tempe, Arizona
         </div>
-        <p className="ml-4 sm:ml-6 lg:ml-[25px] mt-4 lg:mt-[29px]">
+        <p className="text-center mt-4 lg:mt-[29px] px-2">
           Event - information here.
         </p>
         <button
