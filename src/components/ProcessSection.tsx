@@ -12,7 +12,7 @@ interface ProcessStepProps {
 
 const ProcessStep: React.FC<ProcessStepProps> = ({ step, title, content, isExpanded, onToggle }) => {
   return (
-    <div className="bg-[rgba(238,245,255,1)] flex w-full max-w-4xl flex-col mt-4 lg:mt-[25px] rounded-[55px] hover:bg-[rgba(228,235,255,1)] transition-colors overflow-hidden">
+    <div className="bg-[rgba(238,245,255,1)] flex w-full max-w-4xl flex-col mt-4 lg:mt-[25px] rounded-[55px] hover:bg-[rgba(228,235,255,1)] transition-all duration-300 overflow-hidden shadow-sm">
       <div 
         className="flex min-h-[60px] sm:min-h-[70px] lg:min-h-[88px] items-center justify-center px-4 sm:px-6 lg:px-7 py-3 lg:py-3.5 cursor-pointer"
         onClick={onToggle}
@@ -31,7 +31,7 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ step, title, content, isExpan
             {step}. {title}
           </h3>
           <ChevronDown 
-            className={`w-6 h-6 text-[rgba(68,64,175,1)] transition-transform duration-200 ${
+            className={`w-6 h-6 text-[rgba(68,64,175,1)] transition-transform duration-300 ${
               isExpanded ? 'rotate-180' : ''
             }`}
           />
@@ -39,11 +39,28 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ step, title, content, isExpan
       </div>
       
       {isExpanded && (
-        <div className="px-4 sm:px-6 lg:px-7 pb-4 lg:pb-6">
-          <div className="bg-white rounded-lg p-4 lg:p-6 shadow-sm">
-            <p className="text-gray-700 text-base lg:text-lg leading-relaxed">
-              {content}
-            </p>
+        <div className="px-4 sm:px-6 lg:px-7 pb-6 lg:pb-8 animate-fade-in">
+          <div className="bg-gradient-to-br from-white via-blue-50/30 to-purple-50/20 rounded-2xl p-6 lg:p-8 shadow-lg border border-blue-100/50 relative overflow-hidden">
+            {/* Decorative elements */}
+            <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-100/40 to-transparent rounded-full -translate-y-10 translate-x-10"></div>
+            <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-purple-100/40 to-transparent rounded-full translate-y-8 -translate-x-8"></div>
+            
+            {/* Content */}
+            <div className="relative z-10">
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-r from-[rgba(68,64,175,1)] to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                  {step}
+                </div>
+                <div className="flex-1">
+                  <p className="text-gray-700 text-base lg:text-lg leading-relaxed font-medium">
+                    {content}
+                  </p>
+                </div>
+              </div>
+              
+              {/* Bottom accent line */}
+              <div className="mt-6 h-1 w-full bg-gradient-to-r from-[rgba(68,64,175,1)] via-blue-400 to-purple-400 rounded-full opacity-60"></div>
+            </div>
           </div>
         </div>
       )}
