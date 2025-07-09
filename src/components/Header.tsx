@@ -62,7 +62,7 @@ export const Header: React.FC<HeaderProps> = ({ onBookMeeting }) => {
         {/* Logo */}
         <Link to="/" className="flex-shrink-0">
           <img
-            src="./logo/logo.png"
+            src="/logo/logo.png"
             alt="Surabhi Financial Services Logo"
             className="h-17 sm:h-20 md:h-26 lg:h-15 w-auto cursor-pointer"
           />

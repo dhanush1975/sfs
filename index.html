@@ -42,6 +42,12 @@
       "telephone": "+1-XXX-XXX-XXXX"
     }
     </script>
+    <script>
+      window.onerror = function(msg, url, line, col, err) {
+        alert(`JS error: ${msg}\n at ${url}:${line}:${col}`);
+        console.error(err);
+      };
+    </script>
   </head>
 
   <body>
