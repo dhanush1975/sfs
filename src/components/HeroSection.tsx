@@ -54,7 +54,7 @@ const EventRSVPCard = () => {
 
         {/* Static Local Image */}
         <img
-          src="/public/Tempe.jpg  " // 🔁 Put this image inside public/images/
+          src="logo/Tempe.jpg " // 🔁 Put this image inside public/images/
           alt="Tempe, Arizona"
           className="rounded-xl mb-4 w-full max-h-48 object-cover"
         />
