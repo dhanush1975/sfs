@@ -20,10 +20,10 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
             <h3 className="text-lg font-medium text-gray-800 mb-4">Contact Us</h3>
             <div className="space-y-2">
               <p className="text-sm text-gray-700">
-                Email: <a href="mailto:info@surabhifinsvs.com" className="hover:text-blue-600 hover:underline transition-colors">info@surabhifinsvs.com</a>
+                Email: <a href="mailto:info@surabhifinsvs.com" className="hover:text-blue-600 hover:underline transition-colors">contact@surabhifinancial.com</a>
               </p>
               <p className="text-sm text-gray-700">
-                Phone: <a href="tel:+1-555-123-4567" className="hover:text-blue-600 hover:underline transition-colors">+1 (555) 123-4567</a>
+                Phone: <a href="tel:+1-555-123-4567" className="hover:text-blue-600 hover:underline transition-colors">+1 (213) 308-4003</a>
               </p>
             </div>
           </div>
