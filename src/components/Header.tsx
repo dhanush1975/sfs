@@ -59,22 +59,16 @@ export const Header: React.FC<HeaderProps> = ({ onBookMeeting }) => {
   return (
     <header className="bg-white w-full py-0.5 lg:py-1 px-4 sm:px-5 lg:px-6 shadow-sm">
       <nav className="flex w-full max-w-7xl items-center justify-between mx-auto">
-        {/* Logo */}
-        <Link to="/" className="flex-shrink-0">
-  <img
-    src="/logo/logo.png"
-    alt="Surabhi Financial Services Logo"
-    className="
-      max-w-full    /* never exceed its container width */
-      h-auto        /* maintain original aspect ratio */
-      sm:h-12       /* small screens: 3rem height */
-      md:h-16       /* medium screens: 4rem height */
-      lg:h-20       /* large screens: 5rem height */
-      object-contain
-      cursor-pointer
-    "
-  />
-</Link>
+        {/* Logo with responsive layout */}
+        <Link to="/" className="flex-shrink-0 flex items-center">
+          <div className="relative">
+            <img
+              src="/logo/logo.png"
+              alt="Surabhi Financial Services Logo"
+              className="h-12 sm:h-16 md:h-20 lg:h-24 xl:h-28 w-auto object-contain cursor-pointer transition-all duration-300 hover:scale-105"
+            />
+          </div>
+        </Link>
 
         {/* Desktop + Tablet Navigation */}
         <div className="hidden md:flex items-center gap-6 text-base text-black font-medium">
