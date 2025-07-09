@@ -1,6 +1,7 @@
-
 import React, { useState } from 'react';
 import { Menu } from 'lucide-react';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
+
 import {
   Sheet,
   SheetContent,
@@ -15,45 +16,62 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ onBookMeeting }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleNavClick = (section: string) => {
-    console.log(`Navigate to ${section}`);
-    setIsOpen(false); // Close mobile menu when nav item is clicked
+    switch (section) {
+      case 'home':
+        navigate('/');
+        break;
+      case 'services':
+        navigate('/services');
+        break;
+      case 'about':
+        navigate('/Aboutus');
+        break;
+      case 'contact':
+        navigate('/Contact');
+        break;
+      default:
+        console.log(`Navigate to ${section}`);
+    }
+    setIsOpen(false);
   };
 
   const handleBookMeeting = () => {
-    if (onBookMeeting) {
-      onBookMeeting();
-    } else {
-      console.log('Book a meeting clicked');
-    }
-    setIsOpen(false); // Close mobile menu when button is clicked
+    navigate('book-meeting');
+    setIsOpen(false);
   };
 
-  const navigationItems = [
+  const baseItems = [
     { label: 'Home', key: 'home' },
     { label: 'Services', key: 'services' },
-    { label: 'Events', key: 'events' },
     { label: 'About Us', key: 'about' },
-    { label: 'Contact US', key: 'contact' },
+    // { label: 'Contact Us', key: 'contact' },
   ];
 
+  const navigationItems =
+    location.pathname === '/contact'
+      ? baseItems.filter((item) => item.key !== 'contact')
+      : baseItems;
+
   return (
-    <header className="bg-white w-full py-2 lg:py-3 px-4 sm:px-6 lg:px-8 shadow-sm">
+    <header className="bg-white w-full py-0.5 lg:py-1 px-4 sm:px-5 lg:px-6 shadow-sm">
       <nav className="flex w-full max-w-7xl items-center justify-between mx-auto">
-        {/* Logo - Responsive sizing */}
-        <div className="flex-shrink-0">
+        {/* Logo */}
+        <Link to="/" className="flex-shrink-0">
           <img
-            src="https://cdn.builder.io/api/v1/image/assets/fe54aceb0cc448d8a698709588f64afc/95f0edaf107469d9eea8a410483c42eaf7ce70c3?placeholderIfAbsent=true"
+            src="./logo/logo.png"
             alt="Surabhi Financial Services Logo"
-            className="aspect-[1.12] object-contain w-14 sm:w-16 md:w-20 lg:w-[90px]"
+            className="h-17 sm:h-20 md:h-26 lg:h-15 w-auto cursor-pointer"
           />
-        </div>
-        
-        {/* Desktop Navigation - Hidden on tablet and mobile */}
-        <div className="hidden xl:flex items-center gap-6 text-base text-black font-medium">
+        </Link>
+
+        {/* Desktop + Tablet Navigation */}
+        <div className="hidden md:flex items-center gap-6 text-base text-black font-medium">
           {navigationItems.map((item) => (
-            <button 
+            <button
               key={item.key}
               className="hover:text-[rgba(68,64,175,1)] transition-colors cursor-pointer whitespace-nowrap py-1 px-1"
               onClick={() => handleNavClick(item.key)}
@@ -71,9 +89,9 @@ export const Header: React.FC<HeaderProps> = ({ onBookMeeting }) => {
           </button>
         </div>
 
-        {/* Tablet and Mobile Navigation */}
-        <div className="flex xl:hidden items-center gap-2">
-          {/* Book Meeting Button - Always visible */}
+        {/* Mobile Navigation */}
+        <div className="flex md:hidden items-center gap-2">
+          {/* Book Meeting Button (mobile) */}
           <button
             className="bg-[rgba(68,64,175,1)] hover:bg-[rgba(58,54,165,1)] text-white px-3 sm:px-4 py-2 rounded-[25px] transition-colors cursor-pointer text-sm sm:text-base font-medium whitespace-nowrap"
             onClick={handleBookMeeting}
@@ -82,7 +100,7 @@ export const Header: React.FC<HeaderProps> = ({ onBookMeeting }) => {
             Book Meeting
           </button>
 
-          {/* Mobile Menu Trigger */}
+          {/* Hamburger Menu */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <button

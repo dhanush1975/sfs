@@ -1,56 +1,163 @@
+import React, { useState } from 'react';
+import { X } from 'lucide-react';
 
-import React from 'react';
+const EventRSVPCard = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: ''
+  });
 
-interface HeroSectionProps {
-  onRSVP?: () => void;
-}
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => {
+      setIsSubmitted(false);
+      setFormData({ firstName: '', lastName: '', email: '', phone: '' });
+    }, 300);
+  };
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ onRSVP }) => {
-  const handleRSVP = () => {
-    if (onRSVP) {
-      onRSVP();
-    } else {
-      console.log('RSVP clicked');
-    }
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('RSVP Data:', formData);
+    setIsSubmitted(true);
   };
 
   return (
-    <section className="flex flex-col self-stretch relative min-h-[500px] sm:min-h-[600px] lg:min-h-[885px] w-full text-lg sm:text-xl lg:text-2xl text-white font-normal justify-center items-start px-4 sm:px-8 lg:px-[61px] py-16 sm:py-20 lg:py-[124px]">
-      <img
-        src="https://cdn.builder.io/api/v1/image/assets/fe54aceb0cc448d8a698709588f64afc/647a2a6a75ec85010f3bd88d1e287e2ad27c1514?placeholderIfAbsent=true"
-        alt="Hero background"
-        className="absolute h-full w-full object-cover inset-0"
+    <section className="relative h-[500px] w-full overflow-hidden flex items-center justify-start px-8 ">
+
+      {/* Background Video from AWS S3 */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover"
+        src="https://my-website-assets-sfs.s3.us-east-2.amazonaws.com/hero.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
       />
-      <article className="relative bg-[rgba(0,0,0,0.55)] flex w-full max-w-[515px] flex-col items-stretch pl-6 sm:pl-8 lg:pl-[57px] pr-4 pt-[13px] pb-[35px] rounded-[40px]">
-        <header className="text-xl sm:text-2xl lg:text-[32px] font-bold text-center">
-          UPCOMING EVENT
-        </header>
+
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 backdrop-blur-sm  " />
+      <div className="absolute inset-0 bg-black/40 z-0" />
+
+      {/* Event RSVP Card */}
+      <div className="z-10 bg-gray-800 bg-opacity-80 backdrop-blur-md rounded-3xl p-8 shadow-lg max-w-sm w-full text-center">
+        <h2 className="text-white text-xl font-bold mb-4">UPCOMING EVENT</h2>
+
+        {/* Static Local Image */}
         <img
-          src="https://cdn.builder.io/api/v1/image/assets/fe54aceb0cc448d8a698709588f64afc/70e5a4333f8002e58a62bfca9acf9e4a449e72c4?placeholderIfAbsent=true"
-          alt="Upcoming event"
-          className="aspect-[1.79] object-contain w-full mt-6 lg:mt-[43px]"
+          src="/src/images/Tempe.jpg  " // 🔁 Put this image inside public/images/
+          alt="Tempe, Arizona"
+          className="rounded-xl mb-4 w-full max-h-48 object-cover"
         />
-        <div className="self-center mt-4 lg:mt-[26px] text-center">
-          Tempe, Arizona
+
+        <h3 className="text-white text-lg font-semibold">Phoenix, Arizona</h3>
+        <p className="text-gray-300 text-sm mb-4">Event information will update soon</p>
+        <div className="flex justify-center">
+  {/* <button
+    onClick={openModal}
+    className="bg-blue-600 text-white py-2 px-5 rounded-full font-semibold hover:bg-blue-500 transition flex items-center justify-center gap-2"
+  >
+    RSVP Here <span className="text-white text-sm">→</span>
+  </button> */}
+</div>
+      </div>
+
+      RSVP Modal
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={closeModal}
+          ></div>
+
+          <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md z-10 p-8">
+            <button
+              onClick={closeModal}
+              className="absolute top-4 right-4 w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200"
+            >
+              <X className="w-4 h-4 text-gray-600" />
+            </button>
+
+            {!isSubmitted ? (
+              <>
+                <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+                  RSVP for Event
+                </h2>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid grid-cols-2 gap-3">
+                    <input
+                      type="text"
+                      name="firstName"
+                      placeholder="First name"
+                      required
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                      className="border border-blue-200 rounded-lg px-4 py-2 w-full"
+                    />
+                    <input
+                      type="text"
+                      name="lastName"
+                      placeholder="Last name"
+                      required
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      className="border border-blue-200 rounded-lg px-4 py-2 w-full"
+                    />
+                  </div>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    required
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="border border-blue-200 rounded-lg px-4 py-2 w-full"
+                  />
+                  <input
+                    type="tel"
+                    name="phone"
+                    placeholder="Phone"
+                    required
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    className="border border-blue-200 rounded-lg px-4 py-2 w-full"
+                  />
+                  <button
+                    type="submit"
+                    className="bg-blue-600 text-white rounded-lg py-2 w-full hover:bg-blue-700 transition"
+                  >
+                    Submit
+                  </button>
+                </form>
+              </>
+            ) : (
+              <div className="text-center py-6">
+                <h3 className="text-xl font-bold text-blue-600 mb-2">
+                  Thank you for your response!
+                </h3>
+                <p className="text-gray-600">We'll be in touch shortly.</p>
+                <button
+                  onClick={closeModal}
+                  className="mt-4 bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700"
+                >
+                  Close
+                </button>
+              </div>
+            )}
+          </div>
         </div>
-        <p className="text-center mt-4 lg:mt-[29px] px-2">
-          Event - information here.
-        </p>
-        <button
-          className="bg-[rgba(103,106,199,1)] hover:bg-[rgba(93,96,189,1)] self-center flex items-center gap-2.5 justify-center mt-16 sm:mt-20 lg:mt-[100px] p-2.5 rounded-[48px] transition-colors cursor-pointer"
-          onClick={handleRSVP}
-          aria-label="RSVP for the event"
-        >
-          <span className="self-stretch my-auto">
-            RSVP Here
-          </span>
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/fe54aceb0cc448d8a698709588f64afc/ba6d367d03aa07092595e3fcb3c7dc3929290204?placeholderIfAbsent=true"
-            alt="RSVP arrow"
-            className="aspect-[0.87] object-contain w-[52px] self-stretch shrink-0 my-auto"
-          />
-        </button>
-      </article>
+      )}
     </section>
   );
 };
+
+export default EventRSVPCard;

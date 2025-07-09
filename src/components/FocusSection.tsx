@@ -1,80 +1,116 @@
+import { Card, CardContent } from "@/components/ui/card";
+import { Shield, Heart, TrendingUp, Cross } from "lucide-react";
+import estateImage from '../images/estate.jpg'; // adjust path if needed
+import Family from '../images/family.jpg';
+import Retirement from '../images/retirement.jpg';
+import Health from '../images/health.jpg'
+import { Link } from 'react-router-dom';
 
-import React from 'react';
 
-interface FocusPillarProps {
-  image: string;
-  title: string;
-  description: string;
-  imageAlt: string;
-}
 
-const FocusPillar: React.FC<FocusPillarProps> = ({ image, title, description, imageAlt }) => {
-  return (
-    <article className="bg-[rgba(207,218,255,1)] text-black w-full h-full flex flex-col pb-6 lg:pb-10 rounded-[33px_0px_62px_0px] hover:shadow-lg transition-shadow">
-      <img
-        src={image}
-        alt={imageAlt}
-        className="aspect-[1.62] object-cover w-full h-48 sm:h-52 lg:h-56 rounded-[33px_0px_0px_0px] flex-shrink-0"
-      />
-      <div className="flex flex-col flex-grow justify-between mt-4 lg:mt-[15px] px-4 lg:px-[15px]">
-        <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold min-h-[2.5rem] flex items-center">
-          {title}
-        </h3>
-        <p className="text-sm sm:text-base lg:text-xl font-normal mt-6 lg:mt-[53px] flex-grow">
-          {description}
-        </p>
-      </div>
-    </article>
-  );
-};
 
-export const FocusSection: React.FC = () => {
+const Index = () => {
   const pillars = [
+
+
+
     {
-      image: "https://cdn.builder.io/api/v1/image/assets/fe54aceb0cc448d8a698709588f64afc/d795cb055ef95276d98a750b8d420078dc637386?placeholderIfAbsent=true",
-      title: "Family Protection",
-      description: "Involves life insurance and income replacement strategies to safeguard loved ones.",
-      imageAlt: "Family Protection illustration"
+      id: 2,
+      title: "Estate Planning",
+      description: "Ensures wealth transfer, legacy preservation, and legal control over assets after death.",
+      icon: Heart,
+      image: estateImage,
     },
     {
-      image: "https://cdn.builder.io/api/v1/image/assets/fe54aceb0cc448d8a698709588f64afc/78d5271f27ffe15563e9a13f42596122229b768d?placeholderIfAbsent=true",
+      id: 1,
       title: "Family Protection",
       description: "Involves life insurance and income replacement strategies to safeguard loved ones.",
-      imageAlt: "Family Protection illustration"
+      icon: Shield,
+      image: Family,
     },
+    
     {
-      image: "https://cdn.builder.io/api/v1/image/assets/fe54aceb0cc448d8a698709588f64afc/8884f8d45e31aa2d13461bd80bcd45926d21c975?placeholderIfAbsent=true",
+      id: 3,
       title: "Retirement Planning",
       description: "Involves life insurance and income replacement strategies to safeguard loved ones.",
-      imageAlt: "Retirement Planning illustration"
+      icon: TrendingUp,
+      image: Retirement,
     },
     {
-      image: "https://cdn.builder.io/api/v1/image/assets/fe54aceb0cc448d8a698709588f64afc/040ea2a3517821cdf0246485229eb60f7ad7657c?placeholderIfAbsent=true",
+      id: 4,
       title: "Health & Disability Planning",
       description: "Prepares for medical emergencies, long-term care, and loss of income due to illness or disability.",
-      imageAlt: "Health & Disability Planning illustration"
-    }
+      icon: Cross,
+      image: Health,
+    },
   ];
 
   return (
-    <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <header className="text-center">
-        <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl xl:text-[64px] font-bold mt-8 lg:mt-16">
-          Our Focus
-        </h2>
-        <p className="text-black text-lg sm:text-xl lg:text-2xl font-medium mt-4 lg:mt-[29px]">
-          The four pillars of financial planning
-        </p>
-      </header>
-      <div className="w-full mt-6 lg:mt-7">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-5 items-stretch">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+      {/* Hero Section */}
+      <div className="container mx-auto px-4 py-16">
+        <div className="text-center mb-16 animate-fade-in">
+          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
+            Our Focus
+          </h1>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto mb-8"></div>
+          <p className="text-xl md:text-2xl text-gray-600 font-medium max-w-2xl mx-auto">
+            The four pillars of financial planning
+          </p>
+        </div>
+
+        {/* Pillars Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {pillars.map((pillar, index) => (
-            <div key={index} className="w-full h-full">
-              <FocusPillar {...pillar} />
-            </div>
+            <Card 
+              key={pillar.id} 
+              className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-white/80 backdrop-blur-sm border-0 shadow-lg overflow-hidden"
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
+              <div className="relative overflow-hidden">
+                <img 
+                  src={pillar.image} 
+                  alt={pillar.title}
+                  className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full p-3 shadow-lg">
+                  <pillar.icon className="h-6 w-6 text-blue-600" />
+                </div>
+              </div>
+              
+              <CardContent className="p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300">
+                  {pillar.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed text-sm">
+                  {pillar.description}
+                </p>
+              </CardContent>
+            </Card>
           ))}
         </div>
+
+        {/* Call to Action */}
+        <div className="text-center mt-16 animate-fade-in">
+          <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-8 max-w-4xl mx-auto shadow-lg border border-white/20">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Ready to Secure Your Financial Future?
+            </h2>
+            <p className="text-gray-600 mb-6 text-lg">
+              Let our expert team help you build a comprehensive financial plan tailored to your unique needs.
+            </p>
+            < Link to="/book-meeting">
+              <button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                  Get Started Today
+              </button>
+            </Link>
+
+          </div>
+        </div>
       </div>
-    </section>
+    </div>
   );
 };
+
+export default Index;

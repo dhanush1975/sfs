@@ -19,12 +19,7 @@ export const MissionSection: React.FC = () => {
         </div>
         
         <p className="text-gray-700 text-base sm:text-lg lg:text-xl font-normal mt-8 lg:mt-10 text-center max-w-5xl mx-auto leading-relaxed">
-          We are a mission-driven financial services team dedicated to helping
-          families build lasting generational wealth and take charge of their
-          financial future. With a deep belief that no family should be left
-          behind, we provide education, tools, and strategies that empower
-          individuals from all walks of life to achieve financial independence and
-          security for generations to come
+        "Our vision is to lead a financial revolution in North America by addressing the root causes that prevent families from achieving financial stability and prosperity"
         </p>
         
         <div className="bg-white w-full max-w-6xl mt-12 lg:mt-16 pt-8 lg:pt-12 pb-6 lg:pb-8 px-6 lg:px-[76px] rounded-[95px_7px_95px_10px] mx-auto shadow-lg border border-gray-100">

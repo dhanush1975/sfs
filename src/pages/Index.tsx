@@ -1,37 +1,35 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { Header } from '../components/Header';
-import { HeroSection } from '../components/HeroSection';
+import HeroSection from '../components/HeroSection';
 import { MissionSection } from '../components/MissionSection';
-import { FocusSection } from '../components/FocusSection';
+import FocusSection from '../components/FocusSection';
 import { ProcessSection } from '../components/ProcessSection';
 import { CTASection } from '../components/CTASection';
 import { Footer } from '../components/Footer';
+import { RSVPModel } from '../components/RSVPModel';
 
 const Index: React.FC = () => {
+  const [showRSVP, setShowRSVP] = useState(false);
+
   const handleBookMeeting = () => {
-    // In a real application, this would open a booking modal or redirect to a booking page
-    alert('Booking functionality would be implemented here. This could open a modal, redirect to a calendar booking system, or trigger a contact form.');
+    alert('Booking functionality would be implemented here.');
   };
 
   const handleRSVP = () => {
-    // In a real application, this would handle event RSVP
-    alert('RSVP functionality would be implemented here. This could open an RSVP form or redirect to an event management system.');
+    setShowRSVP(true);
   };
 
   return (
     <div className="bg-white flex flex-col overflow-hidden items-center">
-      <Header onBookMeeting={handleBookMeeting} />
-      
       <main className="w-full">
-        <HeroSection onRSVP={handleRSVP} />
+        <HeroSection />
         <MissionSection />
         <FocusSection />
         <ProcessSection />
         <CTASection onBookMeeting={handleBookMeeting} />
       </main>
-      
-      <Footer />
+      <Footer className="bg-blue-100" />
+      <RSVPModel isOpen={showRSVP} onClose={() => setShowRSVP(false)} />
     </div>
   );
 };

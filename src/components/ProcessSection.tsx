@@ -104,9 +104,10 @@ export const ProcessSection: React.FC = () => {
 
   return (
     <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <header className="text-black text-3xl sm:text-4xl lg:text-5xl xl:text-[64px] font-bold mt-8 lg:mt-[43px]">
-        Our process
-      </header>
+      <header className="text-center text-black text-3xl sm:text-4xl lg:text-5xl xl:text-[64px] font-bold mt-8 lg:mt-[43px]">
+  Our process
+</header>
+
       <div className="text-black text-base sm:text-lg lg:text-2xl font-light mt-4">
         <br />
         <span className="font-normal">
