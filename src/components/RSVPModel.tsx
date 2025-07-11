@@ -31,7 +31,7 @@ export const RSVPModel: React.FC<Props> = ({ isOpen, onClose }) => {
     e.preventDefault();
   
     try {
-      const response = await fetch("https://p04i839xek.execute-api.us-east-2.amazonaws.com/RSVPHandler", {
+      const response = await fetch("https://p04i839xek.execute-api.us-east-2.amazonaws.com/prod/RSVPHandler", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
