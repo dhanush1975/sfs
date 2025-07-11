@@ -31,7 +31,7 @@ const EventRSVPCard = () => {
     try {
       console.log("RSVP Data:", formData);
   
-      const response = await fetch("https://p04i839xek.execute-api.us-east-2.amazonaws.com/prod/RSVPHandler", {
+      const response = await fetch("https://p04i839xek.execute-api.us-east-2.amazonaws.com/RSVPHandler", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
