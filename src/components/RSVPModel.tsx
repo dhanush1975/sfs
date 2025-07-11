@@ -29,9 +29,10 @@ export const RSVPModel: React.FC<Props> = ({ isOpen, onClose }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("RSVP Data:", formData);
-
+  
     try {
+      console.log('RSVP Data:', formData);
+  
       const response = await fetch("https://p04i839xek.execute-api.us-east-2.amazonaws.com/prod/RSVPHandler", {
         method: "POST",
         headers: {
@@ -39,21 +40,22 @@ export const RSVPModel: React.FC<Props> = ({ isOpen, onClose }) => {
         },
         body: JSON.stringify(formData)
       });
-
+  
       const resultText = await response.text();
       console.log("Response status:", response.status);
       console.log("Response body:", resultText);
-
+  
       if (response.ok) {
         setIsSubmitted(true);
       } else {
         alert("Something went wrong. Please try again.");
       }
-    } catch (error) {
-      console.error("Network error:", error);
-      alert("Network error. Please try again later.");
+    } catch (error: any) {
+      console.error("Submission error:", error.message);
+      alert("Error submitting RSVP. Please try again.");
     }
   };
+  
 
   const handleClose = () => {
     onClose();
