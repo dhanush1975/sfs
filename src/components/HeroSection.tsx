@@ -25,10 +25,33 @@ const EventRSVPCard = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('RSVP Data:', formData);
-    setIsSubmitted(true);
+  
+    try {
+      console.log("RSVP Data:", formData);
+  
+      const response = await fetch("https://p04i839xek.execute-api.us-east-2.amazonaws.com/prod/RSVPHandler", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      });
+  
+      const resultText = await response.text();
+      console.log("Response status:", response.status);
+      console.log("Response body:", resultText);
+  
+      if (response.ok) {
+        setIsSubmitted(true);
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error: any) {
+      console.error("Submission error:", error.message);
+      alert("Error submitting RSVP. Please try again.");
+    }
   };
 
   return (
