@@ -29,7 +29,8 @@ export const RSVPModel: React.FC<Props> = ({ isOpen, onClose }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+    console.log("RSVP Data:", formData);
+
     try {
       const response = await fetch("https://p04i839xek.execute-api.us-east-2.amazonaws.com/prod/RSVPHandler", {
         method: "POST",
@@ -38,20 +39,21 @@ export const RSVPModel: React.FC<Props> = ({ isOpen, onClose }) => {
         },
         body: JSON.stringify(formData)
       });
-  
+
+      const resultText = await response.text();
+      console.log("Response status:", response.status);
+      console.log("Response body:", resultText);
+
       if (response.ok) {
         setIsSubmitted(true);
       } else {
-        const error = await response.text();
-        console.error("Submission failed:", error);
         alert("Something went wrong. Please try again.");
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Network error:", error);
       alert("Network error. Please try again later.");
     }
   };
-  
 
   const handleClose = () => {
     onClose();
@@ -82,12 +84,49 @@ export const RSVPModel: React.FC<Props> = ({ isOpen, onClose }) => {
             </h2>
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid grid-cols-2 gap-3">
-                <input type="text" name="firstName" value={formData.firstName} onChange={handleInputChange} required placeholder="First Name" className="w-full px-4 py-3 border border-blue-200 rounded-lg" />
-                <input type="text" name="lastName" value={formData.lastName} onChange={handleInputChange} required placeholder="Last Name" className="w-full px-4 py-3 border border-blue-200 rounded-lg" />
+                <input
+                  type="text"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="First Name"
+                  className="w-full px-4 py-3 border border-blue-200 rounded-lg"
+                />
+                <input
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="Last Name"
+                  className="w-full px-4 py-3 border border-blue-200 rounded-lg"
+                />
               </div>
-              <input type="email" name="email" value={formData.email} onChange={handleInputChange} required placeholder="Email" className="w-full px-4 py-3 border border-blue-200 rounded-lg" />
-              <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} required placeholder="Phone" className="w-full px-4 py-3 border border-blue-200 rounded-lg" />
-              <button type="submit" className="w-full bg-blue-600 text-white rounded-lg py-3 hover:bg-blue-700 transition">Submit</button>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+                placeholder="Email"
+                className="w-full px-4 py-3 border border-blue-200 rounded-lg"
+              />
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+                required
+                placeholder="Phone"
+                className="w-full px-4 py-3 border border-blue-200 rounded-lg"
+              />
+              <button
+                type="submit"
+                className="w-full bg-blue-600 text-white rounded-lg py-3 hover:bg-blue-700 transition"
+              >
+                Submit
+              </button>
             </form>
           </>
         ) : (
@@ -96,7 +135,12 @@ export const RSVPModel: React.FC<Props> = ({ isOpen, onClose }) => {
               <h3 className="text-xl font-bold text-blue-600 mb-2">Thanks for your response!</h3>
               <p className="text-gray-600">We'll be in touch soon.</p>
             </div>
-            <button onClick={handleClose} className="bg-blue-600 text-white rounded-lg py-2 px-6 hover:bg-blue-700">Close</button>
+            <button
+              onClick={handleClose}
+              className="bg-blue-600 text-white rounded-lg py-2 px-6 hover:bg-blue-700"
+            >
+              Close
+            </button>
           </div>
         )}
       </div>
