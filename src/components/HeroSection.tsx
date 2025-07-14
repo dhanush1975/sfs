@@ -85,12 +85,12 @@ const EventRSVPCard = () => {
         <h3 className="text-white text-lg font-semibold">Phoenix, Arizona</h3>
         <p className="text-gray-300 text-sm mb-4">Event information will update soon</p>
         <div className="flex justify-center">
-  <button
+  {/* <button
     onClick={openModal}
     className="bg-blue-600 text-white py-2 px-5 rounded-full font-semibold hover:bg-blue-500 transition flex items-center justify-center gap-2"
   >
     RSVP Here <span className="text-white text-sm">→</span>
-  </button>
+  </button> */}
 </div>
       </div>
 
